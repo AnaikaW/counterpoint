@@ -13039,9 +13039,16 @@ const FLIP_ANIMATION_DURATION = 500;
 const DANCE_ANIMATION_DURATION = 500;
 
 // Select a random word every time the page reloads
-const targetWord = targetWords[Math.floor(Math.random() * targetWords.length)];
+function getDailyWord() {
+  const date = new Date();
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+  return targetWords[dayOfYear % targetWords.length];
+}
+
+const targetWord = getDailyWord();
 
 startInteraction();
+
 
 function startInteraction() {
   document.addEventListener("click", handleMouseClick);
